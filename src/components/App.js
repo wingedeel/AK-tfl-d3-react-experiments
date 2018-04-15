@@ -32,7 +32,7 @@ class App extends Component {
       responseData:[], 
       chartData:[],
       searchType: 'name',  
-      searchCriteria:'bank'
+      searchCriteria:'walthamstow'
     };
 
     this.onInputChange = this.onInputChange.bind(this);
@@ -133,7 +133,7 @@ class App extends Component {
           <form className="form" onSubmit={this.onFormSubmit}>
             <span>Enter a name to search for</span>
             <input
-              placeholder="Enter number here"
+              placeholder="Enter name here"
               value={this.state.searchCriteria}
               onChange={this.onInputChange}/>
             <span>
