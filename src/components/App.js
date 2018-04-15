@@ -30,12 +30,10 @@ class App extends Component {
 
     this.state = {
       allData:[], 
-      chartData:[],  
+      chartData:[],
+      searchType: 'name',  
       searchCriteria:'bank'
     };
-
-    this.requestData = this.requestData.bind(this);
-    this.parseData = this.parseData.bind(this);
 
     this.onInputChange = this.onInputChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -48,18 +46,26 @@ class App extends Component {
   componentDidUpdate() {
   }
 
+  
   requestData() {
+    if (this.state.searchType == 'name'){this.requestNameSearch();}
+    if (this.state.searchType == 'line'){this.requestLineSearch();}
+  }
+
+  //------------------------------------------//
+  // Search for Name //
+  requestNameSearch() {
     const url = 'https://api.tfl.gov.uk/Stoppoint/search/' + this.state.searchCriteria;
     const params =  {
     };
     axios.get( url, {params})
       .then(response => {
         this.setState({allData:response.data})
-        this.parseData(response);
+        this.parseNameSearch(response);
       })
   }
 
-  parseData() {
+  parseNameSearch() {
     let data = this.state.allData;
     let chartData =[];
     for (var i=0; i<data.total; i++) {
@@ -71,6 +77,37 @@ class App extends Component {
     this.setState( {chartData});
     console.log('chartData ', chartData); 
   }
+
+  //------------------------------------------//
+  // Search for Line //
+  requestLineSearch() {
+    // const url = 'https://api.tfl.gov.uk/Stoppoint/search/' + this.state.searchCriteria;
+    // const params =  {
+    // };
+    // axios.get( url, {params})
+    //   .then(response => {
+    //     this.setState({allData:response.data})
+    //     this.parseNameSearch(response);
+    //   })
+  }
+
+  parseLineSearch() {
+    // let data = this.state.allData;
+    // let chartData =[];
+    // for (var i=0; i<data.total; i++) {
+    //     let obj = {};
+    //     let item = data.matches[i];
+    //     obj['name'] = item.name;
+    //     chartData.push(item.name);
+    // }
+    // this.setState( {chartData});
+    // console.log('chartData ', chartData); 
+  }
+
+
+
+
+
 
 
   onFormSubmit(event){
@@ -84,15 +121,15 @@ class App extends Component {
   }
 
   render() {
-    console.log('render -----------------');
     // let outputComponent = <SimpleComponent data={this.state.chartData} colorLegend={colorLegend} />
     let outputComponent = <List data={this.state.chartData}/>
      return (
       	<div className="app">
           <h1>Which trains will arrive on this platform?</h1>
           <h4>Powered by data from the TfL Unified API</h4>
+           <p>Display all the stations and bus stops that contain the following name:</p>
           <form className="form" onSubmit={this.onFormSubmit}>
-            <span>Enter a station name to search for</span>
+            <span>Enter a name to search for</span>
             <input
               placeholder="Enter number here"
               value={this.state.searchCriteria}
@@ -100,6 +137,7 @@ class App extends Component {
             <span>
               <button type="submit">Submit</button>
             </span>
+
           </form>
       		{outputComponent}
       </div>
