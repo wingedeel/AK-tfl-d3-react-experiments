@@ -29,7 +29,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      allData:[], 
+      responseData:[], 
       chartData:[],
       searchType: 'name',  
       searchCriteria:'bank'
@@ -60,19 +60,21 @@ class App extends Component {
     };
     axios.get( url, {params})
       .then(response => {
-        this.setState({allData:response.data})
+        this.setState({responseData:response.data})
         this.parseNameSearch(response);
       })
   }
 
   parseNameSearch() {
-    let data = this.state.allData;
+    let data = this.state.responseData;
+    console.log('data ', data);
     let chartData =[];
     for (var i=0; i<data.total; i++) {
         let obj = {};
         let item = data.matches[i];
         obj['name'] = item.name;
-        chartData.push(item.name);
+        obj['modes'] = item.modes;
+        chartData.push(obj);
     }
     this.setState( {chartData});
     console.log('chartData ', chartData); 
@@ -125,7 +127,7 @@ class App extends Component {
     let outputComponent = <List data={this.state.chartData}/>
      return (
       	<div className="app">
-          <h1>Which trains will arrive on this platform?</h1>
+          <h1>Transport for London info</h1>
           <h4>Powered by data from the TfL Unified API</h4>
            <p>Display all the stations and bus stops that contain the following name:</p>
           <form className="form" onSubmit={this.onFormSubmit}>
