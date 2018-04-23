@@ -32,7 +32,7 @@ class App extends Component {
       responseData:[], 
       chartData:[],
       searchType: 'name',  
-      searchCriteria:'walthamstow'
+      searchCriteria:'kings cross'
     };
 
     this.onInputChange = this.onInputChange.bind(this);
@@ -49,7 +49,7 @@ class App extends Component {
   
   requestData() {
     if (this.state.searchType == 'name'){this.requestNameSearch();}
-    if (this.state.searchType == 'line'){this.requestLineSearch();}
+    if (this.state.searchType == 'station-list'){this.requestStationList();}
   }
 
   //------------------------------------------//
@@ -81,29 +81,22 @@ class App extends Component {
   }
 
   //------------------------------------------//
-  // Search for Line //
-  requestLineSearch() {
-    // const url = 'https://api.tfl.gov.uk/Stoppoint/search/' + this.state.searchCriteria;
-    // const params =  {
-    // };
-    // axios.get( url, {params})
-    //   .then(response => {
-    //     this.setState({allData:response.data})
-    //     this.parseNameSearch(response);
-    //   })
+  // Request a list of stations e.g. victoria //
+  requestStationList() {
+    const url = 'https://api.tfl.gov.uk/line/24/stoppoints';
+    const params =  {
+    };
+    axios.get( url, {params})
+      .then(response => {
+        this.setState({allData:response.data})
+        this.parseStationList(response);
+      })
   }
 
-  parseLineSearch() {
-    // let data = this.state.allData;
-    // let chartData =[];
-    // for (var i=0; i<data.total; i++) {
-    //     let obj = {};
-    //     let item = data.matches[i];
-    //     obj['name'] = item.name;
-    //     chartData.push(item.name);
-    // }
-    // this.setState( {chartData});
-    // console.log('chartData ', chartData); 
+  parseStationList() {
+    console.log('parseStationList')
+    let data = this.state.responseData;
+    console.log('data ', data);
   }
 
 
