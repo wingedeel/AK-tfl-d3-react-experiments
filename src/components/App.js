@@ -31,7 +31,7 @@ class App extends Component {
     this.state = {
       responseData:[], 
       chartData:[],
-      searchType: 'name',  
+      searchType: 'tube-lines',  
       searchCriteria:'kings cross'
     };
 
@@ -49,7 +49,7 @@ class App extends Component {
   
   requestData() {
     if (this.state.searchType == 'name'){this.requestNameSearch();}
-    if (this.state.searchType == 'station-list'){this.requestStationList();}
+    if (this.state.searchType == 'tube-lines'){this.requestTubeLines();}
   }
 
   //------------------------------------------//
@@ -81,22 +81,48 @@ class App extends Component {
   }
 
   //------------------------------------------//
-  // Request a list of stations e.g. victoria //
-  requestStationList() {
-    const url = 'https://api.tfl.gov.uk/line/24/stoppoints';
+  /* Request a station and get all its tube lines
+  Euston has an id of 940GZZLUEUS
+  Kings Cross is HUBKGX
+  https://api.tfl.gov.uk/StopPoint/940GZZLUEUS?includeCrowdingData=false
+  Look for modeName with a value of 'tube' OR
+  $type of "Tfl.Api.Presentation.Entities.LineModeGroup"
+
+  {
+      "$type": "Tfl.Api.Presentation.Entities.LineModeGroup, Tfl.Api.Presentation.Entities",
+      "modeName": "tube",
+      "lineIdentifier": [
+        "northern",
+        "victoria"
+      ]
+    },
+
+  */
+  requestTubeLines() {
+    const url = 'https://api.tfl.gov.uk/StopPoint/HUBKGX?includeCrowdingData=false';
     const params =  {
     };
     axios.get( url, {params})
       .then(response => {
         this.setState({allData:response.data})
-        this.parseStationList(response);
+        this.parseTubeLines(response.data);
       })
   }
 
-  parseStationList() {
+  parseTubeLines(response) {
     console.log('parseStationList')
-    let data = this.state.responseData;
-    console.log('data ', data);
+    // let data = this.state.responseData;
+    console.log('response', response);
+    console.log('lineModeGroups', response['lineModeGroups']);
+    // Get the tube 'lineModeGroup'
+    let tubeLines; 
+    for (let i=0; i<response['lineModeGroups'].length; i++){
+      let item = response['lineModeGroups'][i];
+      if (item['modeName']=='tube'){
+          tubeLines=item['lineIdentifier'];
+      }
+    }
+   console.log('TUBE LINES ', tubeLines);
   }
 
 
