@@ -8,19 +8,11 @@ User can change the number of bike points displayed.
 import React, { Component } from 'react';
 import List from './List';
 import axios from 'axios';
+import Circle from 'react-circle';
+
 
 const appID = '45424d2e';
 const appKey = '0c06da185829a08ba97d76499acd69a6';
-
-const colorLegend = 
-[
- // reds from dark to light
- "#67000d", "#a50f15", "#cb181d", "#ef3b2c", "#fb6a4a", "#fc9272", "#fcbba1", "#fee0d2",
- //neutral grey
- "#f0f0f0",
- // blues from light to dark
- "#deebf7", "#c6dbef", "#9ecae1", "#6baed6", "#4292c6", "#2171b5", '#08519c', "#08306b"
-];
 
 
 class App extends Component {
@@ -31,7 +23,7 @@ class App extends Component {
     this.state = {
       responseData:[], 
       chartData:[],
-      searchType: 'tube-lines',  
+      searchType: 'name',  
       searchCriteria:'kings cross'
     };
 
@@ -49,7 +41,7 @@ class App extends Component {
   
   requestData() {
     if (this.state.searchType == 'name'){this.requestNameSearch();}
-    if (this.state.searchType == 'tube-lines'){this.requestTubeLines();}
+    if (this.state.searchType == 'tube-lines'){this.requestTubeLinesFromStopPoint();}
   }
 
   //------------------------------------------//
@@ -72,8 +64,10 @@ class App extends Component {
     for (var i=0; i<data.total; i++) {
         let obj = {};
         let item = data.matches[i];
+        // let stopPoint = 'HUBKGX'
         obj['name'] = item.name;
         obj['modes'] = item.modes;
+        // obj['tubeLines'] = requestTubeLinesFromStopPoint(stopPoint);
         chartData.push(obj);
     }
     this.setState( {chartData});
@@ -84,6 +78,7 @@ class App extends Component {
   /* Request a station and get all its tube lines
   Euston has an id of 940GZZLUEUS
   Kings Cross is HUBKGX
+  Liverpool St is HUBLST
   https://api.tfl.gov.uk/StopPoint/940GZZLUEUS?includeCrowdingData=false
   Look for modeName with a value of 'tube' OR
   $type of "Tfl.Api.Presentation.Entities.LineModeGroup"
@@ -98,8 +93,9 @@ class App extends Component {
     },
 
   */
-  requestTubeLines() {
-    const url = 'https://api.tfl.gov.uk/StopPoint/HUBKGX?includeCrowdingData=false';
+  requestTubeLinesFromStopPoint() {
+    let sp='HUBLST';
+    const url = 'https://api.tfl.gov.uk/StopPoint/'+sp+'?includeCrowdingData=false';
     const params =  {
     };
     axios.get( url, {params})
@@ -167,3 +163,16 @@ class App extends Component {
 }
 
 export default App;
+
+/*
+
+<Router history={history}>
+                      <Route path="/bookings" component={ListBookings} />
+                      <Route path="/bookings/new" component={CreateBooking} />
+                      <Route path="/bookings/:id" component={ViewBooking} />
+                      <Route path="/bookings/update/:id" component={UpdateBooking} />
+                      <Route path="/account" component={AccountOverview} />
+                      <Route path="/account/:section" component={AccountOverview} />
+                      <Redirect path="/" to="/bookings" />
+                    </Router>
+*/
