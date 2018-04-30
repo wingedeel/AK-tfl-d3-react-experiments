@@ -5,12 +5,11 @@ import {Link} from 'react-router-dom';
 class Start extends Component {
 	render() {
 		return (
-			<div>
-				This is the Start!
+			<div className="container">
+				<img src="./img/underground.png" width="300"/>
+				<p>What Would You Like to Find Out About TfL?</p>
 				<button>
-					<Link to="/nameSearch">
-					Go to Name Search page
-					</Link>
+					<Link to="/nameSearch">Next</Link>
 				</button>
 			</div>
 		)

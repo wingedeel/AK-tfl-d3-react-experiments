@@ -8,7 +8,6 @@ User can change the number of bike points displayed.
 import React, { Component } from 'react';
 import List from './List';
 import axios from 'axios';
-import Circle from 'react-circle';
 
 
 const appID = '45424d2e';

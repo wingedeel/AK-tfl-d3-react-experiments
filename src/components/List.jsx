@@ -15,19 +15,18 @@ class List extends React.Component {
         }
         const getIcons = function(modes){
             var icons =  modes.map( (mode, index) => {
-              console.log('mode ', mode);
                 return getIcon(mode);
             })
             return icons;
-         }
+         } 
 
           return (
-            <li key={index}>
-              <span>
-                {getIcons(item['modes'])}
-              </span>
-              {item['name']}
-            </li>
+            <button key={index+'blah'} onClick={() => this.props.callback()}>
+              <li className="list" key={index}>
+                {item['name']}
+                <div>{getIcons(item['modes'])}</div>
+              </li>
+            </button>
           )
       }
     )

@@ -1,10 +1,20 @@
+/*@font-face {
+  font-family: 'London Tube';
+  font-style: normal;
+  font-weight: 400;
+  src: local('./fonts/London-Tube 2.ttf') url('./fonts/London-Tube 2.ttf'); 
+}
+*/
 /* ================================= 
   Base Element Styles
 ==================================== */
 * { 
 	outline: none; 
 	box-sizing: border-box; 
-  border:1px solid tomato;
+  font-family: sans-serif;
+  font-size: 2rem;
+  background-color: #0019A8;
+  color: white;
 }
 
 h1,h2, h3, h4, h5, h6 {
@@ -25,8 +35,27 @@ h1,h2, h3, h4, h5, h6 {
   right: 0; 
 }
 
-body, button, input {
+/*body, button, input {
   font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
   font-size: 0.9em;
+}*/
+
+.container {
+  width:80%;
+  margin: 0 auto;
 }
 
+/* Name Search Page */
+/* Name Search Page */
+.name-search-container{
+  font-size: 1rem;
+}
+
+li {
+  font-size: 1.2rem;
+  list-style: none;
+}
+.icon {
+  margin:1rem;
+  width:100px;
+}
