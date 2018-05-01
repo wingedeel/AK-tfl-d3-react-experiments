@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 
 class List extends React.Component {
   render() {
-    console.log('List data ', this.props);
     let list = this.props.data.map( (item, index) => {
 
         // Create a span containing the relevant icons

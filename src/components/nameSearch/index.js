@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { setSearchTerm, fetchResults } from '../../actions/index';
 
 import List from './List';
-import Results from './results';
+import Results from './Results';
 
 
 class NameSearch extends Component {

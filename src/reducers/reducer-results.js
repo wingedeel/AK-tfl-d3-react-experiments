@@ -9,15 +9,13 @@ export default function(state=INTIAL_STATE, action){
 		case FETCH_SEARCH_RESULTS:
 
 			if (action.payload != undefined) {
-				let data = action.payload.data;
-				let chartData =[];
-			    for (var i=0; i<data.total; i++) {
-			        let obj = {};
-			        let item = data.matches[i];
-			        obj['name'] = item.name;
-			        obj['modes'] = item.modes;
-			        chartData.push(obj);
-			    }
+				const matches = action.payload.data.matches;
+				let chartData = matches.map(function(item, index){
+					let obj = {};
+			    	obj['name'] = item.name;
+			    	obj['modes'] = item.modes;
+			    	return obj;
+				});
 				return { ...state, all: chartData};
 			}
 				
