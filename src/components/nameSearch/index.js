@@ -1,6 +1,6 @@
 import React, {Component} from 'React';
 import {Link} from 'react-router-dom';
-import List from './../List';
+import List from './List';
 import axios from 'axios';
 
 
