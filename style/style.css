@@ -35,17 +35,13 @@ h1,h2, h3, h4, h5, h6 {
   right: 0; 
 }
 
-/*body, button, input {
-  font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
-  font-size: 0.9em;
-}*/
 
 .container {
   width:80%;
   margin: 50px auto;
 }
 
-/* Name Search Page */
+
 /* Name Search Page */
 .name-search-container{
   font-size: 1rem;
@@ -59,3 +55,41 @@ li {
   margin:1rem;
   width:100px;
 }
+
+
+/*.simple-fade-transition-enter {
+  opacity: 0.01;
+}
+
+.simple-fade-transition-enter.simple-fade-transition-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.simple-fade-transition-leave {
+  opacity: 1;
+}
+
+.simple-fade-transition-leave.simple-fade-transition-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}*/
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+

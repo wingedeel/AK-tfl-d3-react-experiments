@@ -7,9 +7,11 @@ class Results extends React.Component {
 
 	render() {
 		const {items, setSearchTerm} = this.props
+		const displayText = items.length>0 ? 'Here are a list of places that have that name in!' : '';
 	
 		return (
 			<div>
+				<p>{displayText}</p>
 				<List data={items}/>
 			</div>
 		)

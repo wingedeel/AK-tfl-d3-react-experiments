@@ -1,17 +1,9 @@
 import React, {Component} from 'React';
 import {Link} from 'react-router-dom';
-import posed, { PoseGroup } from 'react-pose'
 
+class StartPage extends Component {
 
-class Start extends Component {
-
-	render() {
-		const config = {
-		  visible: { opacity: 1 },
-		  hidden: { opacity: 0 }
-		}
-		const Box = posed.div(config)
-
+	render() {	
 		return (
 			<div className="container">
 				<img src="./img/underground.png" width="300"/>
@@ -22,6 +14,7 @@ class Start extends Component {
 			</div>
 		)
 	}
+
 }
 
-export default Start;	
+export default StartPage;	
