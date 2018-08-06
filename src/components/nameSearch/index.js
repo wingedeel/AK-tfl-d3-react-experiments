@@ -33,6 +33,7 @@ class NameSearch extends Component {
   }
 
   render() {
+    console.log('index props ', this.props)
       return (
       	<div className="name-search-container">
           <form className="form" onSubmit={this.onFormSubmit}>

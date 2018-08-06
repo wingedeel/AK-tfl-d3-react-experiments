@@ -1,31 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-
+import Card from './Card';
 
 class List extends React.Component {
   render() {
     let list = this.props.data.map( (item, index) => {
-
-        // Create a span containing the relevant icons
-        const getIcon = function(type){
-          return  (
-            <img key={item+type} className='icon' src={`img/${type}-icon.png`}/>
-          )
-        }
-        const getIcons = function(modes){
-            var icons =  modes.map( (mode, index) => {
-                return getIcon(mode);
-            })
-            return icons;
-         } 
+  
+        // const getIcons = function(){
+        //     var icons =  item['modes'].map( (type, index) => {
+        //         return <img key={item+type} className='icon' src={`img/${type}-icon.png`}/>
+        //     })
+        //     return icons;
+        //  } 
 
           return (
-            <button key={index+'blah'} onClick={() => this.props.callback()}>
+            <button key={index+'list-item'} onClick={() => this.props.callback()}>
+            {
+              /**
               <li className="list" key={index}>
                 {item['name']}
-                <div>{getIcons(item['modes'])}</div>
+               {getIcons()}
               </li>
+              **/
+            }
+              <Card item={item}/>
             </button>
           )
       }

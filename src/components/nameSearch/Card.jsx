@@ -1,29 +1,26 @@
-// import React from 'react';
-// import PropTypes from 'prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-// const Card = ({property}) => {
-//     const {index, picture, city, address, bedrooms, bathrooms, carSpaces} = property;
-//     return (
-//         <div id={`card-${index}`} className="card">
-//             <img src={picture} alt={city} />
-//             <div className="details">
-//                 <span className="index">{index+1}</span>
-//                 <p className="location">
-//                     {city}<br />
-//                     {address}
-//                 </p>
-//                 <ul className="features">
-//                     <li className="icon-bed">{bedrooms} <span>bedrooms</span></li>
-//                     <li className="icon-bath">{bathrooms} <span>bathrooms</span></li>
-//                     <li className="icon-car">{carSpaces} <span>parking spots</span></li>
-//                 </ul>
-//             </div>
-//         </div>
-//     )
-// }
+const Card = ({props}) => {
+    const {item} = props;
 
-// Card.propTypes = {
-//     property: PropTypes.object.isRequired
-// }
+    const getIcons = function(){
+        var icons =  item['modes'].map( (type, index) => {
+            return <img key={item+type} className='icon' src={`img/${type}-icon.png`}/>
+        })
+        return icons;
+    }
 
-// export default Card;
+    return (
+        <li className="list" key={index}>
+            {item['name']}
+            {getIcons()}
+        </li>
+    )
+}
+
+Card.propTypes = {
+    property: PropTypes.object.isRequired
+}
+
+export default Card;
